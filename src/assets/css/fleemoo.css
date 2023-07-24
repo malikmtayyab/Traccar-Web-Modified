@@ -1,0 +1,150 @@
+.card-small {
+  width: 100% !important;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 1600px) {
+  .card-small {
+    height: 15vh;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .card-small {
+    height: 90px;
+  }
+}
+
+.card-small-rowLeft {
+  width: 20%;
+}
+
+.card-small-rowRight {
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  padding-left: 20px;
+  text-align: left;
+  margin-top: 10px;
+}
+
+.card-small-text {
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.3px;
+  color: #000;
+  /* white-space: nowrap; */
+}
+
+.card-small-value {
+  margin: 0;
+  font-family: SF Pro Display;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 36px;
+  color: #222222;
+}
+
+@media screen and (max-width: 1300px) {
+  .card-small-value {
+    font-size: 28px;
+    line-height: 28px;
+  }
+}
+
+.card-big-text {
+  margin: 0px 16px 0px 16px;
+  font-family: SF Pro Display;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 26px;
+}
+
+@media screen and (max-width: 1300px) {
+  .card-small-text {
+    font-size: 12px;
+  }
+}
+
+.middleCards {
+  height: 42vh;
+}
+
+@media screen and (max-width: 1600px) {
+  .middleCards {
+    height: 36vh;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .middleCards {
+    height: 42vh;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .middleCards {
+    height: 100%;
+  }
+}
+
+.eventListContainer {
+  max-height: 250px;
+  border-bottom: none;
+}
+
+@media screen and (max-width: 1600px) {
+  .eventListContainer {
+    max-height: 200px;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .eventListContainer {
+    max-height: 270px;
+  }
+}
+
+.table {
+  max-height: 300px !important;
+  overflow: hidden;
+}
+
+.donutChart {
+  /* height: 35vh; */
+  border-bottom: none;
+  height: 250px;
+}
+
+@media screen and (max-width: 1600px) {
+  .donutChart {
+    height: 200px;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .donutChart {
+    height: 220px;
+  }
+}
+
+.fancyScollbar2::-webkit-scrollbar {
+  width: 8px !important;
+  height: 8px !important;
+}
+
+.fancyScollbar2::-webkit-scrollbar-thumb {
+  background-color: #0352da !important;
+  border-radius: 100px !important;
+  max-width: 30px;
+}
+
+.fancyScollbar2::-webkit-scrollbar-track {
+  background-color: transparent !important;
+  border-radius: 100px !important;
+}
