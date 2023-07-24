@@ -15,6 +15,8 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import IconButton from '@mui/material/IconButton';
 import ListItem from '@mui/material/ListItem';
 import MoreIcon from '@mui/icons-material/More';
+import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
+import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
 import { Toolbar } from '@mui/material';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -50,6 +52,9 @@ const useStyles = makeStyles((theme) => ({
     background: 'transparent',
     padding: 0,
     paddingBottom: '7px',
+    overflowX: 'auto',
+    maxWidth: '100vw',
+    width: '100%',
     [theme.breakpoints.up('sm')]: {
       paddingBottom: '14px',
     },
@@ -234,6 +239,13 @@ const useStyles = makeStyles((theme) => ({
       paddingBottom: '14px',
     },
   },
+  navigation: {
+    [theme.breakpoints.down('md')]: {
+      display: 'flex',
+      flexWrap: 'nowrap',
+      '-webkit-overflow-scrolling': 'touch', /* For smooth scrolling on iOS devices */
+    },
+  },
 }));
 
 const BottomMenu = () => {
@@ -256,6 +268,10 @@ const BottomMenu = () => {
       return 'reports';
     } if (location.pathname === '/') {
       return 'map';
+    } if (location.pathname.startsWith('/fuel')) {
+      return 'fuel';
+    } if (location.pathname.startsWith('/safety')) {
+      return 'safety';
     }
     return null;
   };
@@ -301,6 +317,12 @@ const BottomMenu = () => {
         break;
       case 'settings':
         navigate('/settings/preferences');
+        break;
+      case 'fuel':
+        navigate('/fuel');
+        break;
+      case 'safety':
+        navigate('/safety');
         break;
       case 'logout':
         handleLogout();
@@ -361,7 +383,7 @@ const BottomMenu = () => {
                 )}
               </div>
               <>
-                <BottomNavigation value={currentSelection()} onChange={handleSelection} showLabels>
+                <BottomNavigation value={currentSelection()} onChange={handleSelection} className={classes.navigation} showLabels>
                   <ListItem
                     style={{ cursor: 'pointer' }}
                     onClick={handleMobileMenuOpen}
@@ -430,6 +452,22 @@ const BottomMenu = () => {
                         classes.active)
                     }
                     label={t('settingsTitle')} icon={<SettingsIcon />} value="settings" />
+                  <BottomNavigationAction
+                    style={{ cursor: 'pointer' }}
+                    className={
+                      (classes.listItem,
+                        window.location.hash === '#/fuel' &&
+                        classes.active)
+                    }
+                    label={t('positionFuel')} icon={<LocalGasStationIcon />} value="fuel" />
+                  <BottomNavigationAction
+                    style={{ cursor: 'pointer' }}
+                    className={
+                      (classes.listItem,
+                        window.location.hash === '#/safety' &&
+                        classes.active)
+                    }
+                    label={t('safetyTitle')} icon={<HealthAndSafetyIcon />} value="safety" />
 
                 </BottomNavigation>
 

@@ -56,6 +56,8 @@ import ScheduledPage from './reports/ScheduledPage';
 import DeviceConnectionsPage from './settings/DeviceConnectionsPage';
 import GroupConnectionsPage from './settings/GroupConnectionsPage';
 import UserConnectionsPage from './settings/UserConnectionsPage';
+import Fuel from './fuel/Fuel';
+import Safety from './safety/Safety';
 
 const Navigation = () => {
   const navigate = useNavigate();
@@ -163,6 +165,12 @@ const Navigation = () => {
           <Route path="scheduled" element={<ScheduledPage />} />
           <Route path="statistics" element={<StatisticsPage />} />
         </Route>
+
+        <Route path='/fuel' element={<Fuel />} />
+        <Route path='/safety' element={<Safety />} />
+
+
+
       </Route>
     </Routes>
   );
