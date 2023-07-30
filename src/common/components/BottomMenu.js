@@ -319,10 +319,10 @@ const BottomMenu = () => {
         navigate('/settings/preferences');
         break;
       case 'fuel':
-        navigate('/fuel');
+        navigate('/fuel/overview');
         break;
       case 'safety':
-        navigate('/safety');
+        navigate('/safety/overview');
         break;
       case 'logout':
         handleLogout();
@@ -353,175 +353,180 @@ const BottomMenu = () => {
   const mobileMenuId = 'primary-search-account-menu-mobile';
 
   return (
+
     <>
-      <div
-        className={
-          `${navCollapsed ? classes.navLinksCollapsed : classes.appBarContainer}`
-        }
-      >
-        <Toolbar className={classes.appBar}>
+      {!(location.pathname.startsWith('/fuel') || location.pathname.startsWith('/safety')) &&
+        <>
           <div
-            tabIndex={0}
-            className={classes.list}
-            role="button"
-            onClick={closeDrawer}
-            onKeyDown={closeDrawer}
+            className={
+              `${navCollapsed ? classes.navLinksCollapsed : classes.appBarContainer}`
+            }
           >
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <Toolbar className={classes.appBar}>
               <div
-                className={classes.navCollapsed}
-                onClick={() => setNavCollapsed(!navCollapsed)}
+                tabIndex={0}
+                className={classes.list}
+                role="button"
+                onClick={closeDrawer}
+                onKeyDown={closeDrawer}
               >
-                {!navCollapsed ? (
-                  <ChevronRightIcon
-                    style={{ color: '#fff', fontSize: '24px' }}
-                  />
-                ) : (
-                  <ChevronLeftIcon
-                    style={{ color: '#fff', fontSize: '24px' }}
-                  />
-                )}
-              </div>
-              <>
-                <BottomNavigation value={currentSelection()} onChange={handleSelection} className={classes.navigation} showLabels>
-                  <ListItem
-                    style={{ cursor: 'pointer' }}
-                    onClick={handleMobileMenuOpen}
-                    className={classes.margin2}
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                  <div
+                    className={classes.navCollapsed}
+                    onClick={() => setNavCollapsed(!navCollapsed)}
                   >
-                    <MoreIcon />
-                  </ListItem>
-                  <Menu
-                    anchorEl={mobileMoreAnchorEl}
-                    id={mobileMenuId}
-                    keepMounted
-                    transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-                    open={isMobileMenuOpen}
-                    onClose={handleMobileMenuClose}
-                    className={classes.menu}
-                  >
-                    <MenuItem onClick={handleLogout}>
-                      <IconButton
-                        aria-label="account of current user"
-                        aria-controls="primary-search-account-menu"
-                        aria-haspopup="true"
-                        color="inherit"
-                        style={{ marginLeft: '-10px' }}
-                      >
-                        <ExitToAppIcon />
-                      </IconButton>
-                      {t('loginLogout')}
-                    </MenuItem>
-                  </Menu>
-                  <BottomNavigationAction
-                    style={{ cursor: 'pointer' }}
-                    className={
-                      (classes.listItem,
-                        window.location.hash === '#/dashboard' && classes.active)
-                    }
-                    label={t('dashboardTitle')}
-                    icon={(
-                      <Badge color="error" variant="dot" overlap="circular" invisible={socket !== false}>
-                        <DashboardIcon />
-                      </Badge>
+                    {!navCollapsed ? (
+                      <ChevronRightIcon
+                        style={{ color: '#fff', fontSize: '24px' }}
+                      />
+                    ) : (
+                      <ChevronLeftIcon
+                        style={{ color: '#fff', fontSize: '24px' }}
+                      />
                     )}
-                    value="dashboard"
-                  />
-                  <BottomNavigationAction
-                    style={{ cursor: 'pointer' }}
-                    className={
-                      (classes.listItem,
-                        window.location.hash === '#/map' && classes.active)
-                    }
-                    label={t('mapTitle')} icon={<MapIcon />} value="map" />
-                  {!disableReports && (
-                    <BottomNavigationAction
-                      style={{ cursor: 'pointer' }}
-                      className={
-                        (classes.listItem,
-                          window.location.hash === '#/reports' &&
-                          classes.active)
-                      }
-                      label={t('reportTitle')} icon={<DescriptionIcon />} value="reports" />
-                  )}
-                  <BottomNavigationAction
-                    style={{ cursor: 'pointer' }}
-                    className={
-                      (classes.listItem,
-                        window.location.hash === '#/settings' &&
-                        classes.active)
-                    }
-                    label={t('settingsTitle')} icon={<SettingsIcon />} value="settings" />
-                  <BottomNavigationAction
-                    style={{ cursor: 'pointer' }}
-                    className={
-                      (classes.listItem,
-                        window.location.hash === '#/fuel' &&
-                        classes.active)
-                    }
-                    label={t('positionFuel')} icon={<LocalGasStationIcon />} value="fuel" />
-                  <BottomNavigationAction
-                    style={{ cursor: 'pointer' }}
-                    className={
-                      (classes.listItem,
-                        window.location.hash === '#/safety' &&
-                        classes.active)
-                    }
-                    label={t('safetyTitle')} icon={<HealthAndSafetyIcon />} value="safety" />
+                  </div>
+                  <>
+                    <BottomNavigation value={currentSelection()} onChange={handleSelection} className={classes.navigation} showLabels>
+                      <ListItem
+                        style={{ cursor: 'pointer' }}
+                        onClick={handleMobileMenuOpen}
+                        className={classes.margin2}
+                      >
+                        <MoreIcon />
+                      </ListItem>
+                      <Menu
+                        anchorEl={mobileMoreAnchorEl}
+                        id={mobileMenuId}
+                        keepMounted
+                        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+                        open={isMobileMenuOpen}
+                        onClose={handleMobileMenuClose}
+                        className={classes.menu}
+                      >
+                        <MenuItem onClick={handleLogout}>
+                          <IconButton
+                            aria-label="account of current user"
+                            aria-controls="primary-search-account-menu"
+                            aria-haspopup="true"
+                            color="inherit"
+                            style={{ marginLeft: '-10px' }}
+                          >
+                            <ExitToAppIcon />
+                          </IconButton>
+                          {t('loginLogout')}
+                        </MenuItem>
+                      </Menu>
+                      <BottomNavigationAction
+                        style={{ cursor: 'pointer' }}
+                        className={
+                          (classes.listItem,
+                            window.location.hash === '#/dashboard' && classes.active)
+                        }
+                        label={t('dashboardTitle')}
+                        icon={(
+                          <Badge color="error" variant="dot" overlap="circular" invisible={socket !== false}>
+                            <DashboardIcon />
+                          </Badge>
+                        )}
+                        value="dashboard"
+                      />
+                      <BottomNavigationAction
+                        style={{ cursor: 'pointer' }}
+                        className={
+                          (classes.listItem,
+                            window.location.hash === '#/map' && classes.active)
+                        }
+                        label={t('mapTitle')} icon={<MapIcon />} value="map" />
+                      {!disableReports && (
+                        <BottomNavigationAction
+                          style={{ cursor: 'pointer' }}
+                          className={
+                            (classes.listItem,
+                              window.location.hash === '#/reports' &&
+                              classes.active)
+                          }
+                          label={t('reportTitle')} icon={<DescriptionIcon />} value="reports" />
+                      )}
+                      <BottomNavigationAction
+                        style={{ cursor: 'pointer' }}
+                        className={
+                          (classes.listItem,
+                            window.location.hash === '#/settings' &&
+                            classes.active)
+                        }
+                        label={t('settingsTitle')} icon={<SettingsIcon />} value="settings" />
+                      <BottomNavigationAction
+                        style={{ cursor: 'pointer' }}
+                        className={
+                          (classes.listItem,
+                            window.location.hash === '#/fuel/overview' &&
+                            classes.active)
+                        }
+                        label={t('positionFuel')} icon={<LocalGasStationIcon />} value="fuel" />
+                      <BottomNavigationAction
+                        style={{ cursor: 'pointer' }}
+                        className={
+                          (classes.listItem,
+                            window.location.hash === '#/safety/overview' &&
+                            classes.active)
+                        }
+                        label={t('safetyTitle')} icon={<HealthAndSafetyIcon />} value="safety" />
 
-                </BottomNavigation>
+                    </BottomNavigation>
 
-              </>
-            </div>
-          </div>
-          <Typography variant="h6" color="inherit" className={classes.flex}>
-            &nbsp;
-          </Typography>
-          <div className={classes.grow} />
-          <div className={classes.logoContainer}>
-            <a href="www.fleemoo.com">
-              <img src={fleemooIconB} className={classes.logo} />
-            </a>
-          </div>
-        </Toolbar>
-      </div>
-      <div
-        className={
-          !navCollapsed ? classes.navLinksCollapsed : classes.appBarCollapsed
-        }
-      >
-        <Toolbar className={classes.appBar}>
-          <div
-            tabIndex={0}
-            className={classes.list}
-            role="button"
-            onClick={closeDrawer}
-            onKeyDown={closeDrawer}
-          >
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <div
-                className={classes.navCollapsed}
-                onClick={() => setNavCollapsed(!navCollapsed)}
-              >
-                {!navCollapsed ? (
-                  <ChevronRightIcon
-                    style={{ color: '#fff', fontSize: '28px' }}
-                  />
-                ) : (
-                  <ChevronLeftIcon
-                    style={{ color: '#fff', fontSize: '28px' }}
-                  />
-                )}
+                  </>
+                </div>
               </div>
-            </div>
+              <Typography variant="h6" color="inherit" className={classes.flex}>
+                &nbsp;
+              </Typography>
+              <div className={classes.grow} />
+              <div className={classes.logoContainer}>
+                <a href="www.fleemoo.com">
+                  <img src={fleemooIconB} className={classes.logo} />
+                </a>
+              </div>
+            </Toolbar>
           </div>
-          <div className={classes.logoContainer2}>
-            <a href="www.fleemoo.com">
-              <img src={fleemooIconB} className={classes.logo2} />
-            </a>
+          <div
+            className={
+              !navCollapsed ? classes.navLinksCollapsed : classes.appBarCollapsed
+            }
+          >
+            <Toolbar className={classes.appBar}>
+              <div
+                tabIndex={0}
+                className={classes.list}
+                role="button"
+                onClick={closeDrawer}
+                onKeyDown={closeDrawer}
+              >
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                  <div
+                    className={classes.navCollapsed}
+                    onClick={() => setNavCollapsed(!navCollapsed)}
+                  >
+                    {!navCollapsed ? (
+                      <ChevronRightIcon
+                        style={{ color: '#fff', fontSize: '28px' }}
+                      />
+                    ) : (
+                      <ChevronLeftIcon
+                        style={{ color: '#fff', fontSize: '28px' }}
+                      />
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div className={classes.logoContainer2}>
+                <a href="www.fleemoo.com">
+                  <img src={fleemooIconB} className={classes.logo2} />
+                </a>
+              </div>
+            </Toolbar>
           </div>
-        </Toolbar>
-      </div>
+        </>
+      }
     </>
   );
 };

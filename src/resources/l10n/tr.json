@@ -82,6 +82,8 @@
     "sharedFilterMap": "Filter on Map",
     "sharedSelectFile": "Dosya Seçin",
     "sharedPhone": "Telefon",
+    "sharedOverview": "Genel Bakış",
+    "sharedVehicles": "Araçlar",
     "sharedRequired": "Gerekli",
     "sharedPreferences": "Özellikler",
     "sharedPermissions": "Yetkiler",
@@ -594,5 +596,14 @@
     "deviceStopped": "Cihaz Durduruldu",
     "ignitionOff": "Kontak Kapalı",
     "ignitionOn": "Ateşleme",
-    "deviceMoving": "Cihaz Taşıma"
+    "deviceMoving": "Cihaz Taşıma",
+    "fuelInsightTitle": "Şunun için Yakıt Analizleri",
+    "vehicleTypeTitle": "Tüm Araç Tipleri",
+    "fuelTitle": "Yakıt ekonomisi",
+    "distanceTitle": "Mesafe (mil)",
+    "fuelUsedTitle": "Kullanılan Yakıt (gal)",
+    "fuelCostTitle": "Yakıt maliyeti",
+    "utilTitle": "Araç Kullanımı",
+    "idleFuelTitle": "Rölanti Yakıtı (gal)",
+    "fuelWastedTitle": "Yakıt Boşa"
 }

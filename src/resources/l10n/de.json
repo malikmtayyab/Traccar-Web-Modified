@@ -97,6 +97,8 @@
     "sharedNew": "Neu...",
     "sharedShowAddress": "Adresse anzeigen",
     "sharedShowDetails": "Details",
+    "sharedOverview": "Überblick",
+    "sharedVehicles": "Fahrzeuge",
     "sharedDisabled": "Deaktiviert",
     "sharedMaintenance": "Wartung",
     "sharedOverspeedRegistered": "Geschwindigkeitsüberschreitung registriert",
@@ -594,5 +596,14 @@
     "deviceStopped": "Gerät gestoppt",
     "ignitionOff": "Zündung aus",
     "ignitionOn": "Zündung an",
-    "deviceMoving": "Gerätebewegung"
+    "deviceMoving": "Gerätebewegung",
+    "fuelInsightTitle": "Kraftstoffeinblicke für",
+    "vehicleTypeTitle": "Alle Fahrzeugtypen",
+    "fuelTitle": "Kraftstoffverbrauch",
+    "distanceTitle": "Entfernung (Meilen)",
+    "fuelUsedTitle": "Verbrauchter Kraftstoff (Gallonen)",
+    "fuelCostTitle": "Kraftstoffkosten",
+    "utilTitle": "Fahrzeugnutzung",
+    "idleFuelTitle": "Leerlaufkraftstoff (gal)",
+    "fuelWastedTitle": "Treibstoffverschwendung"
 }

@@ -85,6 +85,8 @@
     "sharedPermissions": "Permissions",
     "sharedConnections": "Connexions",
     "sharedExtra": "Extra",
+    "sharedOverview": "Aperçu",
+    "sharedVehicles": "Véhicules",
     "sharedPrimary": "Primaire",
     "sharedSecondary": "Secondaire",
     "sharedTypeString": "Chaîne de caractères",
@@ -594,5 +596,14 @@
     "deviceMoving": "Déplacement de l'appareil",
     "deviceStopped": "Appareil arrêté",
     "ignitionOff": "Contact éteint",
-    "ignitionOn": "Contact établi"
+    "ignitionOn": "Contact établi",
+    "fuelInsightTitle": "Informations sur le carburant pour",
+    "vehicleTypeTitle": "Tous les types de véhicules",
+    "fuelTitle": "L'économie de carburant",
+    "distanceTitle": "Distance (mi)",
+    "fuelUsedTitle": "Carburant utilisé (gal)",
+    "fuelCostTitle": "Coût de l'essence",
+    "utilTitle": "Util.",
+    "idleFuelTitle": "Carburant au ralenti (gal)",
+    "fuelWastedTitle": "Carburant gaspillé"
 }
