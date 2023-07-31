@@ -125,7 +125,7 @@ const Coaching = () => {
                     </div>
                 </div>
             </div>
-            <TableContainer component={Paper}>
+            <TableContainer component={Paper} style={{padding:30}}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>

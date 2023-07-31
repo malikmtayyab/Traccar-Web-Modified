@@ -10,10 +10,15 @@ import Rating from '@mui/material/Rating';
 import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
 import LinearProgress from '@mui/material/LinearProgress';
 import Chip from '@mui/material/Chip';
-import ListHeader from "../../common/components/ListHeader";
-import ListEntry from '../../common/components/ListEntry'
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
-const listitem = [
+const rows = [
     { vehicel: "LH100", utilization: "78 % ", idleTime: "10 hrs 19 mins 25", PTOTime: "1 hr 9 mins", idleFuel: "6.45 gal", drivingTime: "36 hrs 14 mins 54 secs", drivingFuel: "354.08 gal", distance: "2125.09 mi", fuelEfficiency: "5.9 mpg" },
     { vehicel: "LH100", utilization: "78 % ", idleTime: "10 hrs 19 mins 25", PTOTime: "1 hr 9 mins", idleFuel: "6.45 gal", drivingTime: "36 hrs 14 mins 54 secs", drivingFuel: "354.08 gal", distance: "2125.09 mi", fuelEfficiency: "5.9 mpg" },
     { vehicel: "LH100", utilization: "78 % ", idleTime: "10 hrs 19 mins 25", PTOTime: "1 hr 9 mins", idleFuel: "6.45 gal", drivingTime: "36 hrs 14 mins 54 secs", drivingFuel: "354.08 gal", distance: "2125.09 mi", fuelEfficiency: "5.9 mpg" },
@@ -98,7 +103,63 @@ const Drivers = () => {
                     <div className={classes.stats}>
                         <TopStats idleTime={"12"} drivingTime={122} drivingMile={14} idleFuel={43} drivingFuel={67} />
                     </div>
-                    <div className={classes.list}>
+
+                    <TableContainer component={Paper}>
+                        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>{t("vehicelTitle")}</TableCell>
+                                    <TableCell>{t("utilizationTitle")}</TableCell>
+                                    <TableCell>{t("idleTimeTitle")}</TableCell>
+                                    <TableCell>{t("PTOTimeTitle")}</TableCell>
+                                    <TableCell>{t("idleFuelwithoutmeasure")}</TableCell>
+                                    <TableCell>{t("drivingTimeTitle")}</TableCell>
+                                    <TableCell>{t("drivingFuelTitle")}</TableCell>
+                                    <TableCell>{t("sharedDistance")}</TableCell>
+                                    <TableCell>{t("fuelEfficiencyTitle")}</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody style={{ cursor: 'pointer' }} onClick={handleclick}>
+                                {rows.map((row) => (
+                                    <TableRow
+                                        key={row.name}
+                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                    >
+                                        <TableCell>
+                                            {row.vehicel}
+                                        </TableCell>
+                                        <TableCell>
+                                            {row.utilization}
+                                        </TableCell>
+                                        <TableCell>
+                                            {row.idleTime}
+                                        </TableCell>
+                                        <TableCell>
+                                            {row.PTOTime}
+                                        </TableCell>
+                                        <TableCell>
+                                            {row.idleFuel}
+                                        </TableCell>
+                                        <TableCell>
+                                            {row.drivingTime}
+                                        </TableCell>
+                                        <TableCell>
+                                            {row.drivingFuel}
+                                        </TableCell>
+                                        <TableCell>
+                                            {row.distance}
+                                        </TableCell>
+                                        <TableCell>
+                                            {row.fuelEfficiency}
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+
+
+                    {/* <div className={classes.list}>
                         <div className={classes.horizontalline}></div>
                         <ListHeader />
                         <div className={classes.horizontalline}></div>
@@ -119,7 +180,7 @@ const Drivers = () => {
                                 })
                             }
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             {driver &&
