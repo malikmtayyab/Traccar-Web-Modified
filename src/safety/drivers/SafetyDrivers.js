@@ -184,27 +184,20 @@ const SafetyDrivers = () => {
                                 return (
                                     <>
                                         <Box sx={{ flexGrow: 1, p: 2 }}>
-                                            <Grid
-                                                container
-                                                spacing={2}
-                                            >
-                                                <>
-                                                    <Grid key={index} {...{ xs: 3, sm: 3, md: 3, lg: 3 }}>
-                                                        <div>
-                                                            <div style={{ width: '10px', height: '10px', borderRadius: '10%', backgroundColor: `${behavior.color}` }}></div>
-                                                        </div>
-                                                    </Grid>
-                                                    <Grid key={index} {...{ xs: 3, sm: 3, md: 3, lg: 3 }}>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                                    <div>
+                                                        <div style={{ width: '10px', height: '10px', borderRadius: '10%', backgroundColor: `${behavior.color}` }}></div>
+                                                    </div>
+                                                    <div>
                                                         {behavior.title}
-                                                    </Grid>
-                                                    <Grid key={index} {...{ xs: 3, sm: 3, md: 3, lg: 3 }}>
-                                                        <div className={`${classes.direction} ${behavior.value < 0.5 ? classes.redclass : classes.greenclass}`}>
-                                                            {behavior.value < 0.5 ? <RemoveIcon /> : <AddIcon />}
-                                                            <p>{behavior.value}</p>
-                                                        </div>
-                                                    </Grid>
-                                                </>
-                                            </Grid>
+                                                    </div>
+                                                </div>
+                                                <div className={`${classes.direction} ${behavior.value < 0.5 ? classes.redclass : classes.greenclass}`}>
+                                                    {behavior.value < 0.5 ? <RemoveIcon /> : <AddIcon />}
+                                                    <p>{behavior.value}</p>
+                                                </div>
+                                            </div>
                                         </Box>
                                         <div className={classes.horizontalline}></div>
                                     </>
@@ -213,27 +206,20 @@ const SafetyDrivers = () => {
                         }
                         <h4 style={{ opacity: 0.3 }}>FLEET COMPOSITION</h4>
                         <Box sx={{ flexGrow: 1, p: 2 }}>
-                            <Grid
-                                container
-                                spacing={2}
-                            >
-                                <>
-                                    <Grid {...{ xs: 3, sm: 3, md: 3, lg: 3 }}>
-                                        <div>
-                                            <div style={{ width: '10px', height: '10px', borderRadius: '10%', backgroundColor: '#629ad2' }}></div>
-                                        </div>
-                                    </Grid>
-                                    <Grid {...{ xs: 3, sm: 3, md: 3, lg: 3 }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                    <div>
+                                        <div style={{ width: '10px', height: '10px', borderRadius: '10%', backgroundColor: '#629ad2' }}></div>
+                                    </div>
+                                    <div>
                                         Drivers Added
-                                    </Grid>
-                                    <Grid {...{ xs: 3, sm: 3, md: 3, lg: 3 }}>
-                                        <div className={`${classes.direction} ${1.19 < 0.5 ? classes.redclass : classes.greenclass}`}>
-                                            {1.19 < 0.5 ? <RemoveIcon /> : <AddIcon />}
-                                            <p>{1.19}</p>
-                                        </div>
-                                    </Grid>
-                                </>
-                            </Grid>
+                                    </div>
+                                </div>
+                                <div className={`${classes.direction} ${1.19 < 0.5 ? classes.redclass : classes.greenclass}`}>
+                                    {1.19 < 0.5 ? <RemoveIcon /> : <AddIcon />}
+                                    <p>{1.19}</p>
+                                </div>
+                            </div>
                         </Box>
                     </div>
                 </div>

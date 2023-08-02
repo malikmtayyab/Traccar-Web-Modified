@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React from 'react';
+import React, { useState } from 'react';
 
 const CustomChart = () => {
     const dataPoints = [
@@ -8,42 +8,36 @@ const CustomChart = () => {
         { label: 'Worst', value: 2 },
     ];
 
+    const [activeTooltip, setActiveTooltip] = useState(null);
+
     const handleMouseEnter = (index) => {
-        const point = dataPoints[index];
-        const tooltip = document.getElementById(`tooltip-${index}`);
-        tooltip.innerHTML = `${point.label} - ${point.value}`;
-        tooltip.style.visibility = 'visible';
+        setActiveTooltip(index);
     };
 
-    const handleMouseLeave = (index) => {
-        const tooltip = document.getElementById(`tooltip-${index}`);
-        tooltip.style.visibility = 'hidden';
+    const handleMouseLeave = () => {
+        setActiveTooltip(null);
     };
-
 
     return (
         <div
             style={{
                 width: '100%',
-                height: '50px', // Increase the height to make space for labels
+                height: '50px',
                 position: 'relative',
                 background: '#dedfe0',
-                overflow: 'hidden', // Add this to keep points within the div
+                overflow: 'hidden',
                 borderRadius: 10,
             }}
         >
-            {/* X-Axis */}
             <div
                 style={{
                     width: '100%',
                     height: '2px',
                     position: 'absolute',
-                    bottom: '50%',
                     left: 0,
                 }}
             ></div>
 
-            {/* Data Points */}
             {dataPoints.map((point, index) => {
                 const xPosition = (point.value / 20) * 100;
 
@@ -55,27 +49,24 @@ const CustomChart = () => {
                         borderRadius: '50%',
                         backgroundColor: 'blue',
                         cursor: 'pointer',
-                        // marginBottom: '5px',
                     };
                 } else if (index === 1) {
                     pointStyle = {
                         width: '2px',
-                        height: '80px', // Set a fixed height for the vertical line
+                        height: '80px',
                         background: 'yellow',
-                        borderLeft: '5px solid yellow', // Set the border to show the vertical line
+                        borderLeft: '5px solid yellow',
                         position: 'absolute',
-                        // bottom: '50%',
                         left: `${xPosition}%`,
                         transform: 'translateX(-50%)',
                     };
                 } else if (index === 2) {
                     pointStyle = {
                         width: '2px',
-                        height: '80px', // Set a fixed height for the vertical line
+                        height: '80px',
                         background: 'transparent',
-                        borderLeft: '5px dotted red', // Set the border to show the dotted vertical line
+                        borderLeft: '5px dotted red',
                         position: 'absolute',
-                        // bottom: '50%',
                         left: `${xPosition}%`,
                         transform: 'translateX(-50%)',
                     };
@@ -94,28 +85,29 @@ const CustomChart = () => {
                             alignItems: 'center',
                         }}
                         onMouseEnter={() => handleMouseEnter(index)}
-                        onMouseLeave={() => handleMouseLeave(index)}
+                        onMouseLeave={handleMouseLeave}
                     >
                         <div style={pointStyle}></div>
                         <div
                             id={`tooltip-${index}`}
                             style={{
                                 position: 'absolute',
-                                top: '-25px',
+                                top: '-20px',
                                 left: '-30px',
                                 padding: '5px',
                                 background: 'rgba(0, 0, 0, 0.8)',
                                 color: '#fff',
                                 borderRadius: '5px',
                                 fontSize: '12px',
-                                visibility: 'hidden',
+                                visibility: activeTooltip === index ? 'visible' : 'hidden',
                             }}
-                        ></div>
+                        >
+                            {point.label} - {point.value}
+                        </div>
                     </div>
                 );
             })}
         </div>
-
     );
 };
 /* eslint-enable */
