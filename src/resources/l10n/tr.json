@@ -29,6 +29,11 @@
     "sharedDegreesDecimalMinutes": "Onluk Dakika Derecesi",
     "sharedDegreesMinutesSeconds": "Dakika Saniye Derecesi",
     "sharedName": "İsim",
+    "sharedUpdate": "Son Güncelleme",
+    "sharedSpeed": "Hız",
+    "sharedIgnition": "Ateşleme",
+    "sharedEngineHours": "Motor Saatleri",
+    "sharedWorkHours": "Çalışma saatleri",
     "sharedDescription": "Açıklama",
     "sharedSearch": "Arama",
     "sharedIconScale": "Icon Scale",
@@ -37,7 +42,7 @@
     "sharedCreateGeofence": "Create Geofence",
     "sharedCurrentDay": "Bugün",
     "sharedPreviousDay": "Önceki gün",
-    "sharedFleetOverview": "Filoya genel bakış",
+    "sharedFleetOverview": "Cihaz durumu",
     "sharedCurrentWeek": "Bu hafta",
     "sharedPreviousWeek": "Önceki hafta",
     "sharedCurrentMonth": "İçinde bulunduğumuz ay",
@@ -605,5 +610,8 @@
     "fuelCostTitle": "Yakıt maliyeti",
     "utilTitle": "Araç Kullanımı",
     "idleFuelTitle": "Rölanti Yakıtı (gal)",
-    "fuelWastedTitle": "Yakıt Boşa"
+    "fuelWastedTitle": "Yakıt Boşa",
+    "onlineTitle": "Çevrimiçi",
+    "offlineTitle": "Çevrimdışı",
+    "unknownTitle": "Bilinmeyen"
 }

@@ -40,22 +40,27 @@ const ChartEventsTable = (props) => {
                     minWidth: 70
                 },
                 {
-                    id: 'type',
-                    label: 'sharedAlarms',
+                    id: 'lastUpdate',
+                    label: 'sharedUpdate',
                     minWidth: 70,
                     align: 'right',
                     format: (value) => t(value),
                 },
                 {
-                    id: 'eventtime',
-                    label: 'sharedEventTime',
+                    id: 'speed',
+                    label: 'sharedSpeed',
                     minWidth: 170,
                     align: 'right',
-                    format: (value) => formatDate(value),
                 },
                 {
-                    id: 'address',
-                    label: 'positionAddress',
+                    id: 'engineHours',
+                    label: 'sharedEngineHours',
+                    minWidth: 170,
+                    align: 'right',
+                },
+                {
+                    id: 'workHours',
+                    label: 'sharedWorkHours',
                     minWidth: 170,
                     align: 'right',
                 },
@@ -68,25 +73,27 @@ const ChartEventsTable = (props) => {
                     let item = rawTrafficDataJson[i];
                     let dataLine = this.createTableData(
                         item.deviceName,
-                        item.type,
-                        item.eventTime,
-                        item.address,
+                        item.lastUpdate,
+                        item.speed,
+                        item.engineHours,
+                        item.workHours,
                     );
                     this.data.rows.push(dataLine);
                 }
+
             } catch (ex) {
                 console.error('reading event data failed ', ex.message);
             }
-
         }
         createTableData(
             deviceName,
-            type,
-            eventtime,
-            address,
+            lastUpdate,
+            speed,
+            engineHours,
+            workHours,
         ) {
             return {
-                deviceName, type, eventtime, address,
+                deviceName, lastUpdate, speed, engineHours, workHours
             };
         }
 
@@ -115,6 +122,7 @@ const ChartEventsTable = (props) => {
     });
 
     const CreateEventTable = () => {
+        console.log("final", props.events)
         const classes = useStyles();
         const [page, setPage] = useState(0);
         const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -165,11 +173,6 @@ const ChartEventsTable = (props) => {
                                                     key={column.id}
                                                     align={column.align}
                                                 >
-                                                    <span style={{ fontSize: '12px' }}>
-                                                        {column.format && typeof value === 'number'
-                                                            ? column.format(value)
-                                                            : column.id === 'type' ? t(value) : value}
-                                                    </span>
                                                 </TableCell>
                                             );
                                         })}

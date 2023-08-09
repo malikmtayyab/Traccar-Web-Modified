@@ -42,44 +42,22 @@ class DashboardFleetDevices {
 
     loadFromJson(rawTrafficDataJson, t) {
         if (rawTrafficDataJson) {
-
             this.resetData();
-            this.data.totalCount = Object.values(rawTrafficDataJson).reduce((a, b) => a + b, 0);
+            this.data.totalCount = Object.values(rawTrafficDataJson).length;
             let catCounter = 0;
+            const countOnline = Object.values(rawTrafficDataJson).filter(item => item.status === 'online').length;
+            const countOffline = Object.values(rawTrafficDataJson).filter(item => item.status === 'offline').length;
+            const countUnknown = Object.values(rawTrafficDataJson).filter(item => item.status === 'unknown').length;
 
-            let data_filtered_car = rawTrafficDataJson['car'] || 0;
-            this.data.quantities.push(data_filtered_car);
-            this.data.legend.push(t('deviceCategoryCar'));
-            this.data.colors.push('#1ab7ea');
-            catCounter += data_filtered_car;
+            this.data.quantities.push(countOffline);
+            this.data.legend.push(t('offlineTitle'));
 
-            let data_filtered_truck = rawTrafficDataJson['truck'] || 0;
-            this.data.quantities.push(data_filtered_truck);
-            this.data.legend.push(t('deviceCategoryTruck'));
-            this.data.colors.push('#1ab7ea');
-            catCounter += data_filtered_truck;
+            this.data.quantities.push(countOnline);
+            this.data.legend.push(t('onlineTitle'));
 
-            let data_filtered_pickup = rawTrafficDataJson['pickup'] || 0;
-            this.data.quantities.push(data_filtered_pickup);
-            this.data.legend.push(t('deviceCategoryPickup'));
-            this.data.colors.push('#0077B5');
-            catCounter += data_filtered_pickup;
+            this.data.quantities.push(countUnknown);
+            this.data.legend.push(t('unknownTitle'));
 
-            let data_filtered_person = rawTrafficDataJson['person'] || 0;
-            this.data.quantities.push(data_filtered_person);
-            this.data.legend.push(t('deviceCategoryPerson'));
-            this.data.colors.push('#0084ff');
-            catCounter += data_filtered_person;
-
-            let data_filtered_bus = rawTrafficDataJson['bus'] || 0;
-            this.data.quantities.push(data_filtered_bus);
-            this.data.legend.push(t('deviceCategoryBus'));
-            this.data.colors.push('#0084ff');
-            catCounter += data_filtered_bus;
-
-            this.data.quantities.push(this.data.totalCount - catCounter);
-            this.data.legend.push(t('deviceCategoryOther'));
-            this.data.colors.push('#1ab7ea');
             console.log('--------------------------------------');
 
         }
@@ -199,7 +177,6 @@ class DevicesByType extends React.Component {
 
 
 const ChartFleetOverview = (props) => {
-    const theme = useTheme();
     const classes = useStyles();
     const t = useTranslation();
     const [memo, setMemo] = useState();

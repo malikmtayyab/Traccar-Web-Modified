@@ -85,6 +85,11 @@
     "sharedPermissions": "Permissions",
     "sharedConnections": "Connexions",
     "sharedExtra": "Extra",
+    "sharedUpdate": "Dernière mise à jour",
+    "sharedSpeed": "Vitesse",
+    "sharedIgnition": "Allumage",
+    "sharedEngineHours": "Heures de moteur",
+    "sharedWorkHours": "Heures de travail",
     "sharedOverview": "Aperçu",
     "sharedVehicles": "Véhicules",
     "sharedPrimary": "Primaire",
@@ -96,7 +101,7 @@
     "sharedOverspeedRegistered": "Vitesse trop haute enreregistrée",
     "sharedDevicesAffected": "Appareils affectés",
     "sharedGeofenceViolation": "Violation du perimètre virtuel",
-    "sharedFleetOverview": "Aperçu de la flotte",
+    "sharedFleetOverview": "Statut du périphérique",
     "sharedInfoTitle": "Information",
     "sharedSavedCommand": "Commande sauvegardée",
     "sharedSavedCommands": "Commandes sauvegardées",
@@ -605,5 +610,8 @@
     "fuelCostTitle": "Coût de l'essence",
     "utilTitle": "Util.",
     "idleFuelTitle": "Carburant au ralenti (gal)",
-    "fuelWastedTitle": "Carburant gaspillé"
+    "fuelWastedTitle": "Carburant gaspillé",
+    "onlineTitle": "En ligne",
+    "offlineTitle": "Hors ligne",
+    "unknownTitle": "Inconnu"
 }

@@ -85,6 +85,11 @@
     "sharedPermissions": "Berechtigungen",
     "sharedConnections": "Verbindungen",
     "sharedExtra": "Extra",
+    "sharedUpdate": "Letztes Update",
+    "sharedSpeed": "Geschwindigkeit",
+    "sharedIgnition": "Zündung",
+    "sharedEngineHours": "Motorstunden",
+    "sharedWorkHours": "Arbeitsstunden",
     "sharedPrimary": "Primär",
     "sharedSecondary": "Sekundär",
     "sharedTypeString": "Text",
@@ -107,7 +112,7 @@
     "sharedDevicesAffected": "Betroffene Geräte",
     "sharedGeofenceViolation": "Geofence-Verletzung",
     "sharedAllDevices": "Alle Geräte",
-    "sharedFleetOverview": "Flottenübersicht",
+    "sharedFleetOverview": "Gerätestatus",
     "sharedAlarms": "Alarme",
     "sharedEventTime": "Ereigniszeit",
     "sharedLocation": "Ort",
@@ -605,5 +610,8 @@
     "fuelCostTitle": "Kraftstoffkosten",
     "utilTitle": "Fahrzeugnutzung",
     "idleFuelTitle": "Leerlaufkraftstoff (gal)",
-    "fuelWastedTitle": "Treibstoffverschwendung"
+    "fuelWastedTitle": "Treibstoffverschwendung",
+    "onlineTitle": "Online",
+    "offlineTitle": "Offline",
+    "unknownTitle": "Unbekannt"
 }

@@ -15,8 +15,6 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import IconButton from '@mui/material/IconButton';
 import ListItem from '@mui/material/ListItem';
 import MoreIcon from '@mui/icons-material/More';
-import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
-import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
 import { Toolbar } from '@mui/material';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -25,7 +23,6 @@ import { sessionActions } from '../../store';
 import { useTranslation } from './LocalizationProvider';
 import { useRestriction } from '../util/permissions';
 import { nativePostMessage } from './NativeInterface';
-import fleemooIconB from '../../resources/images/data/logo.png';
 
 const useStyles = makeStyles((theme) => ({
   flex: {
@@ -268,10 +265,6 @@ const BottomMenu = () => {
       return 'reports';
     } if (location.pathname === '/') {
       return 'map';
-    } if (location.pathname.startsWith('/fuel')) {
-      return 'fuel';
-    } if (location.pathname.startsWith('/safety')) {
-      return 'safety';
     }
     return null;
   };
@@ -318,12 +311,6 @@ const BottomMenu = () => {
       case 'settings':
         navigate('/settings/preferences');
         break;
-      case 'fuel':
-        navigate('/fuel/overview');
-        break;
-      case 'safety':
-        navigate('/safety/overview');
-        break;
       case 'logout':
         handleLogout();
         break;
@@ -355,178 +342,147 @@ const BottomMenu = () => {
   return (
 
     <>
-      {!(location.pathname.startsWith('/fuel') || location.pathname.startsWith('/safety')) &&
-        <>
+      <div
+        className={
+          `${navCollapsed ? classes.navLinksCollapsed : classes.appBarContainer}`
+        }
+      >
+        <Toolbar className={classes.appBar}>
           <div
-            className={
-              `${navCollapsed ? classes.navLinksCollapsed : classes.appBarContainer}`
-            }
+            tabIndex={0}
+            className={classes.list}
+            role="button"
+            onClick={closeDrawer}
+            onKeyDown={closeDrawer}
           >
-            <Toolbar className={classes.appBar}>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
               <div
-                tabIndex={0}
-                className={classes.list}
-                role="button"
-                onClick={closeDrawer}
-                onKeyDown={closeDrawer}
+                className={classes.navCollapsed}
+                onClick={() => setNavCollapsed(!navCollapsed)}
               >
-                <div style={{ display: 'flex', justifyContent: 'center' }}>
-                  <div
-                    className={classes.navCollapsed}
-                    onClick={() => setNavCollapsed(!navCollapsed)}
+                {!navCollapsed ? (
+                  <ChevronRightIcon
+                    style={{ color: '#fff', fontSize: '24px' }}
+                  />
+                ) : (
+                  <ChevronLeftIcon
+                    style={{ color: '#fff', fontSize: '24px' }}
+                  />
+                )}
+              </div>
+              <>
+                <BottomNavigation value={currentSelection()} onChange={handleSelection} className={classes.navigation} showLabels>
+                  <ListItem
+                    style={{ cursor: 'pointer' }}
+                    onClick={handleMobileMenuOpen}
+                    className={classes.margin2}
                   >
-                    {!navCollapsed ? (
-                      <ChevronRightIcon
-                        style={{ color: '#fff', fontSize: '24px' }}
-                      />
-                    ) : (
-                      <ChevronLeftIcon
-                        style={{ color: '#fff', fontSize: '24px' }}
-                      />
+                    <MoreIcon />
+                  </ListItem>
+                  <Menu
+                    anchorEl={mobileMoreAnchorEl}
+                    id={mobileMenuId}
+                    keepMounted
+                    transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+                    open={isMobileMenuOpen}
+                    onClose={handleMobileMenuClose}
+                    className={classes.menu}
+                  >
+                    <MenuItem onClick={handleLogout}>
+                      <IconButton
+                        aria-label="account of current user"
+                        aria-controls="primary-search-account-menu"
+                        aria-haspopup="true"
+                        color="inherit"
+                        style={{ marginLeft: '-10px' }}
+                      >
+                        <ExitToAppIcon />
+                      </IconButton>
+                      {t('loginLogout')}
+                    </MenuItem>
+                  </Menu>
+                  <BottomNavigationAction
+                    style={{ cursor: 'pointer' }}
+                    className={
+                      (classes.listItem,
+                        window.location.hash === '#/dashboard' && classes.active)
+                    }
+                    label={t('dashboardTitle')}
+                    icon={(
+                      <Badge color="error" variant="dot" overlap="circular" invisible={socket !== false}>
+                        <DashboardIcon />
+                      </Badge>
                     )}
-                  </div>
-                  <>
-                    <BottomNavigation value={currentSelection()} onChange={handleSelection} className={classes.navigation} showLabels>
-                      <ListItem
-                        style={{ cursor: 'pointer' }}
-                        onClick={handleMobileMenuOpen}
-                        className={classes.margin2}
-                      >
-                        <MoreIcon />
-                      </ListItem>
-                      <Menu
-                        anchorEl={mobileMoreAnchorEl}
-                        id={mobileMenuId}
-                        keepMounted
-                        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-                        open={isMobileMenuOpen}
-                        onClose={handleMobileMenuClose}
-                        className={classes.menu}
-                      >
-                        <MenuItem onClick={handleLogout}>
-                          <IconButton
-                            aria-label="account of current user"
-                            aria-controls="primary-search-account-menu"
-                            aria-haspopup="true"
-                            color="inherit"
-                            style={{ marginLeft: '-10px' }}
-                          >
-                            <ExitToAppIcon />
-                          </IconButton>
-                          {t('loginLogout')}
-                        </MenuItem>
-                      </Menu>
-                      <BottomNavigationAction
-                        style={{ cursor: 'pointer' }}
-                        className={
-                          (classes.listItem,
-                            window.location.hash === '#/dashboard' && classes.active)
-                        }
-                        label={t('dashboardTitle')}
-                        icon={(
-                          <Badge color="error" variant="dot" overlap="circular" invisible={socket !== false}>
-                            <DashboardIcon />
-                          </Badge>
-                        )}
-                        value="dashboard"
-                      />
-                      <BottomNavigationAction
-                        style={{ cursor: 'pointer' }}
-                        className={
-                          (classes.listItem,
-                            window.location.hash === '#/map' && classes.active)
-                        }
-                        label={t('mapTitle')} icon={<MapIcon />} value="map" />
-                      {!disableReports && (
-                        <BottomNavigationAction
-                          style={{ cursor: 'pointer' }}
-                          className={
-                            (classes.listItem,
-                              window.location.hash === '#/reports' &&
-                              classes.active)
-                          }
-                          label={t('reportTitle')} icon={<DescriptionIcon />} value="reports" />
-                      )}
-                      <BottomNavigationAction
-                        style={{ cursor: 'pointer' }}
-                        className={
-                          (classes.listItem,
-                            window.location.hash === '#/settings' &&
-                            classes.active)
-                        }
-                        label={t('settingsTitle')} icon={<SettingsIcon />} value="settings" />
-                      <BottomNavigationAction
-                        style={{ cursor: 'pointer' }}
-                        className={
-                          (classes.listItem,
-                            window.location.hash === '#/fuel/overview' &&
-                            classes.active)
-                        }
-                        label={t('positionFuel')} icon={<LocalGasStationIcon />} value="fuel" />
-                      <BottomNavigationAction
-                        style={{ cursor: 'pointer' }}
-                        className={
-                          (classes.listItem,
-                            window.location.hash === '#/safety/overview' &&
-                            classes.active)
-                        }
-                        label={t('safetyTitle')} icon={<HealthAndSafetyIcon />} value="safety" />
+                    value="dashboard"
+                  />
+                  <BottomNavigationAction
+                    style={{ cursor: 'pointer' }}
+                    className={
+                      (classes.listItem,
+                        window.location.hash === '#/map' && classes.active)
+                    }
+                    label={t('mapTitle')} icon={<MapIcon />} value="map" />
+                  {!disableReports && (
+                    <BottomNavigationAction
+                      style={{ cursor: 'pointer' }}
+                      className={
+                        (classes.listItem,
+                          window.location.hash === '#/reports' &&
+                          classes.active)
+                      }
+                      label={t('reportTitle')} icon={<DescriptionIcon />} value="reports" />
+                  )}
+                  <BottomNavigationAction
+                    style={{ cursor: 'pointer' }}
+                    className={
+                      (classes.listItem,
+                        window.location.hash === '#/settings' &&
+                        classes.active)
+                    }
+                    label={t('settingsTitle')} icon={<SettingsIcon />} value="settings" />
+                </BottomNavigation>
 
-                    </BottomNavigation>
-
-                  </>
-                </div>
-              </div>
-              <Typography variant="h6" color="inherit" className={classes.flex}>
-                &nbsp;
-              </Typography>
-              <div className={classes.grow} />
-              <div className={classes.logoContainer}>
-                <a href="www.fleemoo.com">
-                  <img src={fleemooIconB} className={classes.logo} />
-                </a>
-              </div>
-            </Toolbar>
+              </>
+            </div>
           </div>
+          <Typography variant="h6" color="inherit" className={classes.flex}>
+            &nbsp;
+          </Typography>
+          <div className={classes.grow} />
+        </Toolbar>
+      </div>
+      <div
+        className={
+          !navCollapsed ? classes.navLinksCollapsed : classes.appBarCollapsed
+        }
+      >
+        <Toolbar className={classes.appBar}>
           <div
-            className={
-              !navCollapsed ? classes.navLinksCollapsed : classes.appBarCollapsed
-            }
+            tabIndex={0}
+            className={classes.list}
+            role="button"
+            onClick={closeDrawer}
+            onKeyDown={closeDrawer}
           >
-            <Toolbar className={classes.appBar}>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
               <div
-                tabIndex={0}
-                className={classes.list}
-                role="button"
-                onClick={closeDrawer}
-                onKeyDown={closeDrawer}
+                className={classes.navCollapsed}
+                onClick={() => setNavCollapsed(!navCollapsed)}
               >
-                <div style={{ display: 'flex', justifyContent: 'center' }}>
-                  <div
-                    className={classes.navCollapsed}
-                    onClick={() => setNavCollapsed(!navCollapsed)}
-                  >
-                    {!navCollapsed ? (
-                      <ChevronRightIcon
-                        style={{ color: '#fff', fontSize: '28px' }}
-                      />
-                    ) : (
-                      <ChevronLeftIcon
-                        style={{ color: '#fff', fontSize: '28px' }}
-                      />
-                    )}
-                  </div>
-                </div>
+                {!navCollapsed ? (
+                  <ChevronRightIcon
+                    style={{ color: '#fff', fontSize: '28px' }}
+                  />
+                ) : (
+                  <ChevronLeftIcon
+                    style={{ color: '#fff', fontSize: '28px' }}
+                  />
+                )}
               </div>
-              <div className={classes.logoContainer2}>
-                <a href="www.fleemoo.com">
-                  <img src={fleemooIconB} className={classes.logo2} />
-                </a>
-              </div>
-            </Toolbar>
+            </div>
           </div>
-        </>
-      }
+        </Toolbar>
+      </div>
     </>
   );
 };

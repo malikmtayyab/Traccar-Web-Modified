@@ -56,13 +56,6 @@ import ScheduledPage from './reports/ScheduledPage';
 import DeviceConnectionsPage from './settings/DeviceConnectionsPage';
 import GroupConnectionsPage from './settings/GroupConnectionsPage';
 import UserConnectionsPage from './settings/UserConnectionsPage';
-import Fuel from './fuel/Fuel';
-import Safety from './safety/Safety';
-import Drivers from './fuel/drivers/Drivers';
-import Vehicle from './fuel/vehicle/Vehicle'
-import SafetyDrivers from './safety/drivers/SafetyDrivers';
-import Coaching from './safety/coaching/Coaching';
-import Events from './safety/events/Events';
 
 const Navigation = () => {
   const navigate = useNavigate();
@@ -170,22 +163,6 @@ const Navigation = () => {
           <Route path="scheduled" element={<ScheduledPage />} />
           <Route path="statistics" element={<StatisticsPage />} />
         </Route>
-
-        <Route path='fuel' >
-          <Route path="overview" element={<Fuel />} />
-          <Route path="drivers" element={<Drivers />} />
-          <Route path="vehicles" element={<Vehicle />} />
-        </Route>
-
-        <Route path='safety'>
-          <Route path='overview' element={<Safety />} />
-          <Route path='drivers' element={<SafetyDrivers />} />
-          <Route path='coaching' element={<Coaching />} />
-          <Route path='events' element={<Events />} />
-        </Route>
-
-
-
       </Route>
     </Routes>
   );
